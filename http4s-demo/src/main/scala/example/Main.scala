@@ -5,7 +5,6 @@ import java.time.LocalDateTime
 import scala.concurrent.ExecutionContext.Implicits.global
 
 import cats.effect.{ExitCode => CatsExitCode}
-import fs2.kafka._
 import io.circe.generic.auto._
 import io.circe.syntax._
 import org.http4s._
@@ -17,71 +16,33 @@ import org.http4s.server.blaze._
 import zio._
 import zio.console._
 import zio.interop.catz._
+import kafka._
+import example.configuration._
+import example.http.Routes
 
-object Main extends CatsApp {
+object Main extends App {
 
-  type KafkaTask[A] = RIO[ZEnv, A]
-  val dsl: Http4sDsl[KafkaTask] = Http4sDsl[KafkaTask]
-  import dsl._
+  type AppEnv = ZEnv with Config with Kafka.Publisher
+  type AppTask[A] = RIO[AppEnv, A]
 
-  case class KafkaRequest(data: Map[String, String])
-  type KProducer = KafkaProducer[KafkaTask, String, KafkaRequest]
-
-  val kafkaReqSerializer = Serializer.instance[KafkaTask, KafkaRequest] {
-    (topic, headers, kafkaReq) =>
-      RIO {
-        kafkaReq.data.asJson.toString().getBytes("UTF-8")
-      }
-  }
-
-  val producerSettings =
-    ProducerSettings(
-      keySerializer = Serializer[KafkaTask, String],
-      valueSerializer = kafkaReqSerializer
-    ).withBootstrapServers("localhost:9093")
-
-  implicit val decoder = jsonOf[KafkaTask, KafkaRequest]
-
-  def sendToKafka(req: KafkaRequest, producer: KProducer) = {
-    val key = LocalDateTime.now().toString()
-    val record = ProducerRecord("demo-topic", key, req)
-    producer.produce(ProducerRecords.one(record)).flatten
-  }
-
-  def mkHttpApp(producer: KProducer) = {
-
-    val helloWorldService = HttpRoutes.of[KafkaTask] {
-      case GET -> Root / "helloworld" =>
-        Ok("Hello world!")
-      case req @ POST -> Root / "submit" =>
-        for {
-          kafkaReq <- req.as[KafkaRequest]
-          produceResult <- sendToKafka(kafkaReq, producer).either
-          resp <- produceResult match {
-            case Left(ex)     => InternalServerError(ex.getMessage)
-            case Right(value) => Ok(s"published: ${value.records.size}")
-          }
-        } yield resp
-    }
-
-    Router[KafkaTask]("/api" -> helloWorldService).orNotFound
-  }
+  val appEnv = Configuration.fixedTest >+> Kafka.live
 
   override def run(args: List[String]): URIO[ZEnv, ExitCode] = {
-
-    val program = producerResource[KafkaTask]
-      .using(producerSettings)
-      .use { producer =>
-        BlazeServerBuilder[KafkaTask](global)
-          .bindHttp(8081)
-          .withHttpApp(mkHttpApp(producer))
+    val program = for {
+      httpConfig <- configuration.httpConfig
+      server <- ZIO.runtime[AppEnv].flatMap { implicit runtime =>
+        BlazeServerBuilder[AppTask](global)
+          .bindHttp(httpConfig.port)
+          .withHttpApp(Routes(httpConfig.baseURI).router)
           .serve
-          .compile[KafkaTask, KafkaTask, CatsExitCode]
+          .compile[AppTask, AppTask, CatsExitCode]
           .drain
       }
 
+    } yield server
+
     program
-      .provideLayer(ZEnv.live)
+      .provideSomeLayer[ZEnv](appEnv)
       .tapError(err => putStrLn(s"Execution failed with error: $err"))
       .exitCode
 
