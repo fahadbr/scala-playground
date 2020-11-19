@@ -12,13 +12,16 @@ package object configuration {
   case class AppConfig(http: HttpConfig, kafka: KafkaConfig)
 
   // convenience accessors for getting configs out of a ZIO effect's environment
-  val kafkaConfig: URIO[Has[KafkaConfig], KafkaConfig] = ZIO.access(_.get)
-  val httpConfig: URIO[Has[HttpConfig], HttpConfig] = ZIO.access(_.get)
+  // a ZIO[Has[Config], Nothing, Config] pretty much describes a functional effect (you can think of it as a closure)
+  // that will pull a "Config" out of an environment that "Has" a "Config"
+  // and cannot fail (hence the "Nothing" type parameter)
+  val kafkaConfig: ZIO[Has[KafkaConfig], Nothing, KafkaConfig] = ZIO.access(_.get)
+  val httpConfig: ZIO[Has[HttpConfig], Nothing, HttpConfig] = ZIO.access(_.get)
 
   object Configuration {
     //val live: Layer[Throwable, Config] = ???
 
-    val fixedTest: Layer[Throwable, Config] = ZLayer.succeedMany(
+    val hardcodedTest: ZLayer[Any, Nothing, Config] = ZLayer.succeedMany(
       Has(
         HttpConfig(
           port = 8081,

@@ -1,7 +1,6 @@
 package example.http
 
 import example.kafka.Kafka
-import org.http4s.dsl.Http4sDsl
 import io.circe.generic.auto._
 import io.circe.syntax._
 import org.http4s._
@@ -9,8 +8,8 @@ import org.http4s.circe._
 import org.http4s.dsl.Http4sDsl
 import org.http4s.implicits._
 import org.http4s.server.Router
-import zio.interop.catz._
 import zio._
+import zio.interop.catz._
 
 case class Routes[R <: Kafka.Publisher](baseURI: String) {
 
