@@ -12,6 +12,7 @@ val logbackVersion = "1.2.3"
 val jacksonVersion = "2.11.2"
 val zioVersion = "1.0.3"
 val zioInteropVersion = "2.2.0.1"
+val typesafeCfgVersion = "1.4.0"
 
 resolvers += Resolver.sonatypeRepo("snapshots")
 
@@ -35,6 +36,7 @@ lazy val root = (project in file("."))
       "dev.zio" %% "zio-interop-cats" % zioInteropVersion,
       "dev.zio" %% "zio-test" % zioVersion % "test",
       "dev.zio" %% "zio-test-sbt" % zioVersion % "test",
+      "com.typesafe" % "config" % typesafeCfgVersion,
     )
   )
 

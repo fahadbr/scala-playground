@@ -10,7 +10,7 @@ import fs2.kafka.ProducerRecord
 import fs2.kafka.ProducerRecords
 import zio._
 
-class KafkaPublisherService(producer: Producer, topic: String)
+final class KafkaService(producer: Producer, topic: String)
     extends Kafka.Service[Request] {
 
   override def publish(msg: Request): Task[Result] = {

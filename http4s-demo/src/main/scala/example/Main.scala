@@ -26,7 +26,7 @@ object Main extends App {
   type AppEnv = ZEnv with Config with Kafka.Publisher
   type AppTask[A] = ZIO[AppEnv, Throwable, A]
 
-  val appEnv = Configuration.hardcodedTest >+> Kafka.live
+  val appEnv = Configuration.live >+> Kafka.live
 
   override def run(args: List[String]): ZIO[ZEnv, Nothing, ExitCode] = {
     val program = for {

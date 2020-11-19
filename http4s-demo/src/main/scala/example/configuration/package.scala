@@ -15,20 +15,19 @@ package object configuration {
   // a ZIO[Has[Config], Nothing, Config] pretty much describes a functional effect (you can think of it as a closure)
   // that will pull a "Config" out of an environment that "Has" a "Config"
   // and cannot fail (hence the "Nothing" type parameter)
-  val kafkaConfig: ZIO[Has[KafkaConfig], Nothing, KafkaConfig] = ZIO.access(_.get)
-  val httpConfig: ZIO[Has[HttpConfig], Nothing, HttpConfig] = ZIO.access(_.get)
+  val kafkaConfig: ZIO[Has[KafkaConfig], Nothing, KafkaConfig] =
+    ZIO.access(_.get)
+
+  val httpConfig: ZIO[Has[HttpConfig], Nothing, HttpConfig] =
+    ZIO.access(_.get)
+
 
   object Configuration {
-    //val live: Layer[Throwable, Config] = ???
+    val live: ZLayer[Any, Throwable, Config] = ZLayer.fromFunctionMany { _ =>
+      val appCfg = ConfigLoader.load
 
-    val hardcodedTest: ZLayer[Any, Nothing, Config] = ZLayer.succeedMany(
-      Has(
-        HttpConfig(
-          port = 8081,
-          baseURI = "/api"
-        )
-      )
-        ++ Has(KafkaConfig(brokers = "localhost:9093", topic = "demo-topic"))
-    )
+      Has(appCfg.kafka) ++
+        Has(appCfg.http)
+    }
   }
 }

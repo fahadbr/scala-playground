@@ -45,7 +45,7 @@ package object kafka {
         config <- configuration.kafkaConfig.toManaged_
         producerSettings = mkProducerSettings(config)
         producer <- producerResource[Task].using(producerSettings).toManagedZIO
-      } yield new KafkaPublisherService(producer, config.topic))
+      } yield new KafkaService(producer, config.topic))
   }
 
 }
