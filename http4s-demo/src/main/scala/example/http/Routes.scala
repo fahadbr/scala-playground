@@ -31,8 +31,8 @@ case class Routes[R <: Kafka.Publisher](baseURI: String) {
           kafkaReq <- req.as[Kafka.Request]
           produceResult <- Kafka.publish(kafkaReq).either
           resp <- produceResult match {
-            case Left(ex)     => InternalServerError(ex.getMessage)
-            case Right(value) => Ok(s"published: ${value.records.size}")
+            case Left(exception) => InternalServerError(exception.getMessage)
+            case Right(value)    => Ok(s"published: ${value.records.size}\n")
           }
         } yield resp
     }

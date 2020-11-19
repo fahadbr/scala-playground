@@ -16,9 +16,9 @@ package object kafka {
     }
 
     case class Request(data: Map[String, String])
-    type Result = ProducerResult[String, Request, Unit]
+
     type Publisher = Has[Service[Request]]
-    type KIO[A] = RIO[Has[KafkaConfig], A]
+    type Result = ProducerResult[String, Request, Unit]
     type Producer = KafkaProducer[Task, String, Request]
 
     val kafkaReqSerializer = Serializer.instance[Task, Request] {

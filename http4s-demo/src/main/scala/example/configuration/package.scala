@@ -4,12 +4,14 @@ import zio._
 
 package object configuration {
 
+  // ZIO module which contains all necessary configs to run the app
   type Config = Has[KafkaConfig] with Has[HttpConfig]
 
   case class KafkaConfig(brokers: String, topic: String)
   case class HttpConfig(port: Int, baseURI: String)
   case class AppConfig(http: HttpConfig, kafka: KafkaConfig)
 
+  // convenience accessors for getting configs out of a ZIO effect's environment
   val kafkaConfig: URIO[Has[KafkaConfig], KafkaConfig] = ZIO.access(_.get)
   val httpConfig: URIO[Has[HttpConfig], HttpConfig] = ZIO.access(_.get)
 

@@ -33,6 +33,8 @@ lazy val root = (project in file("."))
       "com.fasterxml.jackson.core" % "jackson-annotations" % jacksonVersion,
       "dev.zio" %% "zio" % zioVersion,
       "dev.zio" %% "zio-interop-cats" % zioInteropVersion,
+      "dev.zio" %% "zio-test" % zioVersion % "test",
+      "dev.zio" %% "zio-test-sbt" % zioVersion % "test",
     )
   )
 
