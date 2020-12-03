@@ -23,15 +23,18 @@ class ArrayMetrics[T: ClassTag](input: T*) extends mutable.IndexedSeq[T] {
 }
 
 val am = new ArrayMetrics(0,1,1,2,3,5,8)
-//val am = new ArrayMetrics('a', 'b', 'c')
 
 am.accessCount
 am(0)
 am.accessCount
 am(1)
-am.accessCount
-am(2)
-am.accessCount
-am(0)
-am.accessCount
-am(2)
+
+
+val map = mutable.HashMap[String, String]("hi" -> "hello")
+map += "wassap" -> "man"
+
+val m = Map("hi" -> "hello")
+
+def hi(m: Map[String, String]) = m("hi")
+
+hi(m)
