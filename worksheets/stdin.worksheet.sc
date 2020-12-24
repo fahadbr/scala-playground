@@ -1,4 +1,5 @@
 import scala.io.StdIn
 
+println("enter some text")
 val i = StdIn.readLine()
-println(i)
+println(s"you wrote '${i}'")
