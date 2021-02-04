@@ -1,6 +1,5 @@
-
 object Res {
-  def ways( total: Int, k: Int ): Int = {
+  def ways(total: Int, k: Int): Int = {
     println(s"total=$total k=$k")
     if (k == 1)
       return 1
@@ -8,7 +7,7 @@ object Res {
     val topWays = total / k
     val remainder = total % k
 
-    val numberOfWaysKCanBeSummed = ways(k, k-1) * topWays
+    val numberOfWaysKCanBeSummed = ways(k, k - 1) * topWays
 
     val numberOfWaysRCanBeSummed = remainder match {
       case 1 => 1
@@ -27,7 +26,6 @@ object Res {
       case _ => {}
     }
 
-
     var sums: Int = 1
     var bottom: Int = 1
     var top: Int = value - 1
@@ -36,10 +34,10 @@ object Res {
       sums += calcSplit2(top) + calcSplit2(bottom)
       top -= 1
       bottom += 1
-      println(s"calcSplit2 value=$value, top=$top, bottom=$bottom, sums=$sums")
+      //println(s"calcSplit2 value=$value, top=$top, bottom=$bottom, sums=$sums")
     }
     sums += calcSplit2(top)
-    println(s"calcSplit2 value=$value, top=$top, bottom=$bottom, sums=$sums")
+    //println(s"calcSplit2 value=$value, top=$top, bottom=$bottom, sums=$sums")
 
     sums
   }
@@ -47,8 +45,6 @@ object Res {
 
 Res.calcSplit2(2)
 Res.calcSplit2(4)
-
-
 
 import Res.ways
 
@@ -60,10 +56,10 @@ ways(8, 3)
 ways(5, 2)
 // expected: 3
 
-ways(56,23)
+ways(56, 23)
 // expected: 483076
 
-ways(23,22)
+ways(23, 22)
 
 ways(4, 4)
 //[1, 1, 1, 1, 1, 1, 1, 1]
@@ -78,7 +74,6 @@ ways(4, 4)
 // [23]
 // [22, 1]
 // [21, 2]
-
 
 // [4]
 // [3, 1]
