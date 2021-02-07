@@ -1,0 +1,188 @@
+{
+    "version": "1.4.0",
+    "project": {
+        "name": "root",
+        "directory": "/data/code/myrepos/scala-playground/scala-js",
+        "workspaceDir": "/data/code/myrepos/scala-playground/scala-js",
+        "sources": [
+            "/data/code/myrepos/scala-playground/scala-js/src/main/scala",
+            "/data/code/myrepos/scala-playground/scala-js/src/main/scala-2.13",
+            "/data/code/myrepos/scala-playground/scala-js/src/main/scala-2",
+            "/data/code/myrepos/scala-playground/scala-js/src/main/java",
+            "/data/code/myrepos/scala-playground/scala-js/target/scala-2.13/src_managed/main"
+        ],
+        "dependencies": [
+            
+        ],
+        "classpath": [
+            "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.4/scala-library-2.13.4.jar",
+            "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-library_2.13/1.3.1/scalajs-library_2.13-1.3.1.jar",
+            "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-dom_sjs1_2.13/1.1.0/scalajs-dom_sjs1_2.13-1.1.0.jar"
+        ],
+        "out": "/data/code/myrepos/scala-playground/scala-js/.bloop/root",
+        "classesDir": "/data/code/myrepos/scala-playground/scala-js/.bloop/root/scala-2.13/classes",
+        "resources": [
+            "/data/code/myrepos/scala-playground/scala-js/src/main/resources",
+            "/data/code/myrepos/scala-playground/scala-js/target/scala-2.13/resource_managed/main"
+        ],
+        "scala": {
+            "organization": "org.scala-lang",
+            "name": "scala-compiler",
+            "version": "2.13.4",
+            "options": [
+                "-Xplugin:/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-compiler_2.13.4/1.3.1/scalajs-compiler_2.13.4-1.3.1.jar"
+            ],
+            "jars": [
+                "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-compiler/2.13.4/scala-compiler-2.13.4.jar",
+                "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.4/scala-library-2.13.4.jar",
+                "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-reflect/2.13.4/scala-reflect-2.13.4.jar",
+                "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/jline/jline/3.16.0/jline-3.16.0.jar",
+                "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/net/java/dev/jna/jna/5.3.1/jna-5.3.1.jar"
+            ],
+            "analysis": "/data/code/myrepos/scala-playground/scala-js/target/streams/compile/bloopAnalysisOut/_global/streams/inc_compile_2.13.zip",
+            "setup": {
+                "order": "mixed",
+                "addLibraryToBootClasspath": true,
+                "addCompilerToClasspath": false,
+                "addExtraJarsToClasspath": false,
+                "manageBootClasspath": true,
+                "filterLibraryFromClasspath": true
+            }
+        },
+        "java": {
+            "options": [
+                
+            ]
+        },
+        "test": {
+            "frameworks": [
+                {
+                    "names": [
+                        "org.scalacheck.ScalaCheckFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs2.runner.Specs2Framework",
+                        "org.specs2.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.specs.runner.SpecsFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "org.scalatest.tools.Framework",
+                        "org.scalatest.tools.ScalaTestFramework"
+                    ]
+                },
+                {
+                    "names": [
+                        "com.novocode.junit.JUnitFramework"
+                    ]
+                }
+            ],
+            "options": {
+                "excludes": [
+                    
+                ],
+                "arguments": [
+                    
+                ]
+            }
+        },
+        "platform": {
+            "name": "js",
+            "config": {
+                "version": "1.3.1",
+                "mode": "debug",
+                "kind": "none",
+                "emitSourceMaps": false,
+                "jsdom": false,
+                "toolchain": [
+                    
+                ]
+            },
+            "mainClass": [
+                
+            ]
+        },
+        "resolution": {
+            "modules": [
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.13.4",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.4/scala-library-2.13.4.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.4/scala-library-2.13.4-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-js",
+                    "name": "scalajs-library_2.13",
+                    "version": "1.3.1",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scalajs-library_2.13",
+                            "path": "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-library_2.13/1.3.1/scalajs-library_2.13-1.3.1.jar"
+                        },
+                        {
+                            "name": "scalajs-library_2.13",
+                            "classifier": "sources",
+                            "path": "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-library_2.13/1.3.1/scalajs-library_2.13-1.3.1-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-js",
+                    "name": "scalajs-dom_sjs1_2.13",
+                    "version": "1.1.0",
+                    "configurations": "default",
+                    "artifacts": [
+                        {
+                            "name": "scalajs-dom_sjs1_2.13",
+                            "path": "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-dom_sjs1_2.13/1.1.0/scalajs-dom_sjs1_2.13-1.1.0.jar"
+                        },
+                        {
+                            "name": "scalajs-dom_sjs1_2.13",
+                            "classifier": "sources",
+                            "path": "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-js/scalajs-dom_sjs1_2.13/1.1.0/scalajs-dom_sjs1_2.13-1.1.0-sources.jar"
+                        }
+                    ]
+                },
+                {
+                    "organization": "org.scala-lang",
+                    "name": "scala-library",
+                    "version": "2.13.4",
+                    "configurations": "optional",
+                    "artifacts": [
+                        {
+                            "name": "scala-library",
+                            "path": "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.4/scala-library-2.13.4.jar"
+                        },
+                        {
+                            "name": "scala-library",
+                            "classifier": "sources",
+                            "path": "/home/fahad/.cache/coursier/v1/https/repo1.maven.org/maven2/org/scala-lang/scala-library/2.13.4/scala-library-2.13.4-sources.jar"
+                        }
+                    ]
+                }
+            ]
+        },
+        "tags": [
+            "library"
+        ]
+    }
+}
